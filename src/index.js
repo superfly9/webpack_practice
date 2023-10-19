@@ -1,4 +1,5 @@
 import { add, MathCalculator, multiply } from "./math.js";
+import "./index.css";
 
 /* multiply main.js에 포함되지 X 
 => export 대상을 실제로 호출해서 써야 main.js에 포함
