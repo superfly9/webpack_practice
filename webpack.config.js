@@ -3,10 +3,18 @@ const path = require("path");
 module.exports = {
   mode: "development",
   entry: {
-    seoul: "./src/index.js",
+    dist: "./src/index.js",
   },
   output: {
     filename: "[name].js",
-    path: path.resolve("./city"),
+    path: path.resolve("./dist"),
+  },
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"],
+      },
+    ],
   },
 };
