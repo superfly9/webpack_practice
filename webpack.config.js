@@ -19,7 +19,17 @@ module.exports = {
       },
       {
         test: /\.(jpg | png)$/,
-        use: ["file-loader"],
+        loader: "file-loader",
+        options: {
+          sourceMap: true,
+        },
+        // use: ["file-loader"],
+      },
+      {
+        test: /\.(js|tsx|jsx)$/,
+        use: path.resolve(__dirname, "src", "cityLoader"),
+        // use: path.resolve("./src/cityLoader"), 이렇게도 가능
+        // use: "./src/cityLoader.js",
       },
     ],
   },

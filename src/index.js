@@ -1,4 +1,4 @@
-import { add, MathCalculator, multiply } from "./math.js";
+import { add, MathCalculator } from "./math.js";
 import "./index.css";
 
 /* multiply main.js에 포함되지 X 
