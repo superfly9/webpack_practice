@@ -3,11 +3,13 @@ const path = require("path");
 module.exports = {
   mode: "development",
   entry: {
-    dist: "./src/index.js",
+    main: "./src/index.js",
+    math: "./src/math.js",
   },
   output: {
     filename: "[name].js",
-    path: path.resolve("./dist"),
+    path: path.resolve("dist"),
+    // writes to disk  ./dist/main.js , ./dist/math.js 생성
   },
   module: {
     rules: [
