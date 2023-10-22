@@ -1,5 +1,6 @@
 const webpack = require("webpack"); //to access built-in plugins
 const path = require("path");
+const banner = require("./plugins/Banner");
 
 module.exports = {
   mode: "development",
@@ -15,9 +16,7 @@ module.exports = {
   },
   plugins: [
     new webpack.BannerPlugin({
-      banner: (yourVariable) => {
-        return `Banner Plugnin Test ${new Date().toLocaleString()}`;
-      },
+      banner,
     }),
   ],
 };
