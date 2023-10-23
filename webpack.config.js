@@ -1,14 +1,16 @@
+const webpack = require("webpack"); //to access built-in plugins
 const path = require("path");
+const banner = require("./plugins/Banner");
 
 module.exports = {
   mode: "development",
   entry: {
     main: "./src/index.js",
-    math: "./src/math.js",
-  },
+  }
   output: {
     filename: "[name].js",
     path: path.resolve("dist"),
+    clean:true,
     // writes to disk  ./dist/main.js , ./dist/math.js 생성
   },
   module: {
