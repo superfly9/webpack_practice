@@ -2,6 +2,9 @@ const webpack = require("webpack"); //to access built-in plugins
 const path = require("path");
 const banner = require("./plugins/Banner");
 
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+
 module.exports = {
   mode: "development",
   entry: {
@@ -13,11 +16,27 @@ module.exports = {
     clean: true,
   },
   module: {
-    rules: [{}],
+    rules: [
+      {
+        test: /\.css$/,
+        use: [
+          ...[
+            process.env.NODE_ENV === "production"
+              ? MiniCssExtractPlugin.loader
+              : "style-loader",
+          ],
+          "css-loader",
+        ],
+      },
+    ],
   },
   plugins: [
     new webpack.BannerPlugin({
       banner,
     }),
+    new CleanWebpackPlugin(),
+    ...(process.env.NODE_ENV === "production"
+      ? new MiniCssExtractPlugin()
+      : ""),
   ],
 };
