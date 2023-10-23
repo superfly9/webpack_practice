@@ -14,19 +14,13 @@ module.exports = {
     filename: "[name].js",
     path: path.resolve(__dirname, "dist"),
     clean: true,
+    // writes to disk  ./dist/main.js , ./dist/math.js 생성
   },
   module: {
     rules: [
       {
         test: /\.css$/,
-        use: [
-          ...[
-            process.env.NODE_ENV === "production"
-              ? MiniCssExtractPlugin.loader
-              : "style-loader",
-          ],
-          "css-loader",
-        ],
+        use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
     ],
   },
@@ -35,8 +29,6 @@ module.exports = {
       banner,
     }),
     new CleanWebpackPlugin(),
-    ...(process.env.NODE_ENV === "production"
-      ? new MiniCssExtractPlugin()
-      : ""),
+    new MiniCssExtractPlugin(),
   ],
 };
