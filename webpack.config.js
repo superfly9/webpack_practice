@@ -1,21 +1,30 @@
 const webpack = require("webpack"); //to access built-in plugins
-const path = require("path");
 const banner = require("./plugins/Banner");
-
+const path = require("path");
 module.exports = {
   mode: "development",
   entry: {
     main: "./src/index.js",
-  }
+  },
   output: {
     filename: "[name].js",
-    path: path.resolve("dist"),
-    clean:true,
+    path: path.resolve(process.cwd(), "dist"),
+    clean: true,
     // writes to disk  ./dist/main.js , ./dist/math.js 생성
   },
   module: {
     rules: [
       {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: "babel-loader",
+            options: {
+              presets: [["@babel/preset-env", { targets: "defaults" }]],
+            },
+          },
+        ],
         test: /\.css$/,
         use: ["style-loader", "css-loader"],
       },
@@ -27,12 +36,12 @@ module.exports = {
         },
         // use: ["file-loader"],
       },
-      {
-        test: /\.(js|tsx|jsx)$/,
-        use: path.resolve(__dirname, "src", "cityLoader"),
-        // use: path.resolve("./src/cityLoader"), 이렇게도 가능
-        // use: "./src/cityLoader.js",
-      },
+      // {
+      //   test: /\.(js|tsx|jsx)$/,
+      //   use: path.resolve(__dirname, "src", "cityLoader"),
+      //   // use: path.resolve("./src/cityLoader"), 이렇게도 가능
+      //   // use: "./src/cityLoader.js",
+      // },
     ],
   },
 };
