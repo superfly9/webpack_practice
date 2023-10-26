@@ -9,6 +9,19 @@ module.exports = {
     path: path.resolve(process.cwd(), "dist"),
   },
   module: {
-    rules: [{ test: /\.js$/, exclude: /node_modules/, loader: "babel-loader" }],
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: "babel-loader",
+            options: {
+              presets: [["@babel/preset-env", { targets: "defaults" }]],
+            },
+          },
+        ],
+      },
+    ],
   },
 };
