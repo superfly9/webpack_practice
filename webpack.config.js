@@ -3,9 +3,6 @@ const banner = require("./plugins/Banner");
 const path = require("path");
 module.exports = {
   mode: "development",
-  entry: {
-    main: "./src/index.js",
-  },
   output: {
     filename: "[name].js",
     path: path.resolve(process.cwd(), "dist"),
@@ -25,6 +22,8 @@ module.exports = {
             },
           },
         ],
+      },
+      {
         test: /\.css$/,
         use: ["style-loader", "css-loader"],
       },
