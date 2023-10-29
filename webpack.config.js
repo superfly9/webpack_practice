@@ -1,11 +1,13 @@
 const webpack = require("webpack"); //to access built-in plugins
 const banner = require("./plugins/Banner");
 const path = require("path");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+
 module.exports = {
   mode: "development",
   output: {
-    filename: "[name].js",
-    path: path.resolve(process.cwd(), "dist"),
+    filename: "[name].[chunkhash].js",
+    path: path.resolve(process.cwd(), "chunkhash_dist"),
     clean: true,
     // writes to disk  ./dist/main.js , ./dist/math.js 생성
   },
@@ -25,7 +27,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: ["style-loader", "css-loader"],
+        use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
       {
         test: /\.(jpg | png)$/,
@@ -43,4 +45,9 @@ module.exports = {
       // },
     ],
   },
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: "[name].[chunkhash].css",
+    }),
+  ],
 };
