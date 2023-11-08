@@ -1,5 +1,6 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
   mode: "development",
@@ -9,8 +10,6 @@ module.exports = {
   output: {
     filename: "[name].[contenthash].js",
     path: path.resolve(__dirname, "dist"),
-    clean: true,
-    // assetModuleFilename: "images/[hash][ext]",
   },
   devServer: {
     port: 9000,
@@ -52,6 +51,9 @@ module.exports = {
     ],
   },
   plugins: [
+    new CleanWebpackPlugin({
+      verbose: true, // 어떤 파일이 삭제되었는지 로그 남겨줌
+    }),
     new HtmlWebpackPlugin({
       title: "Hello_DEV_ENV",
       minify: false,
