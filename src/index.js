@@ -1,5 +1,9 @@
 import { add, MathCalculator } from "./math.js";
+import "./timer";
 import "./index.css";
+import ilSanImage from "./ilsan_park.jpg";
+
+console.log("[ilSanImage]:", ilSanImage);
 
 /* multiply main.js에 포함되지 X 
 => export 대상을 실제로 호출해서 써야 main.js에 포함
