@@ -10,15 +10,6 @@ module.exports = {
   output: {
     filename: "[name].[contenthash].js",
     path: path.resolve(__dirname, "dist"),
-    clean: true,
-    // assetModuleFilename: "images/[hash][ext]",
-  },
-  devServer: {
-    port: 9000,
-    static: {
-      directory: path.resolve(__dirname, "dist"),
-    },
-    hot: true,
   },
   module: {
     rules: [
