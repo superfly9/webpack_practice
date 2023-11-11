@@ -1,5 +1,6 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const config = {
@@ -9,6 +10,9 @@ const config = {
   output: {
     filename: "[name].[contenthash].js",
     path: path.resolve(__dirname, "dist"),
+  },
+  optimization: {
+    usedExports: true,
   },
   module: {
     rules: [
@@ -51,6 +55,9 @@ const config = {
     new HtmlWebpackPlugin({
       title: "Hello_World",
       description: "configuration_webpack",
+    }),
+    new CleanWebpackPlugin({
+      verbose: true, // 어떤 파일이 삭제되었는지 로그 남겨줌
     }),
     ...[
       process.env.NODE_ENV === "production" ? new MiniCssExtractPlugin() : "",
