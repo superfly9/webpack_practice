@@ -34,7 +34,19 @@ const config = {
           process.env.NODE_ENV === "production"
             ? MiniCssExtractPlugin.loader
             : "style-loader",
+          ,
           "css-loader",
+        ],
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          process.env.NODE_ENV === "production"
+            ? MiniCssExtractPlugin.loader
+            : "style-loader",
+          ,
+          "css-loader",
+          "sass-loader",
         ],
       },
       {

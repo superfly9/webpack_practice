@@ -1,7 +1,9 @@
 import { add, MathCalculator } from "./math.js";
+import HelloWorldButton from "./components/hello-world-button/hello-world-button.js";
+import Heading from "./components/heading/heading.js";
+import ilSanImage from "./ilsan_park.jpg";
 import "./timer";
 import "./index.css";
-import ilSanImage from "./ilsan_park.jpg";
 
 console.log("[ilSanImage]:", ilSanImage);
 
@@ -13,3 +15,14 @@ const obj = new MathCalculator(10, 20, -5);
 obj.add();
 
 console.log(add(500, 220));
+
+const heading = new Heading();
+heading.render();
+const helloWorldButton = new HelloWorldButton();
+helloWorldButton.render();
+
+if (process.env.NODE_ENV === "production") {
+  console.log("Production mode");
+} else if (process.env.NODE_ENV === "development") {
+  console.log("Development mode");
+}
