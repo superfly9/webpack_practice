@@ -1,6 +1,5 @@
 const path = require("path");
 const { merge } = require("webpack-merge");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const commonConfig = require("./webpack.common.js");
 
 const config = merge(commonConfig, {
@@ -16,11 +15,6 @@ const config = merge(commonConfig, {
     },
     hot: true,
   },
-  plugins: [
-    new CleanWebpackPlugin({
-      verbose: true, // 어떤 파일이 삭제되었는지 로그 남겨줌
-    }),
-  ],
 });
 
 module.exports = config;
