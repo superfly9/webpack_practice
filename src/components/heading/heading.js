@@ -1,4 +1,4 @@
-// import "./heading.scss";
+import "./heading.scss";
 
 class Heading {
   render() {
