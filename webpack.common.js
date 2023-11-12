@@ -6,13 +6,18 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const config = {
   entry: {
     main: "./src/index.js",
+    dupe: "./src/duplicate.js",
   },
   output: {
     filename: "[name].[contenthash].js",
     path: path.resolve(__dirname, "dist"),
   },
   optimization: {
-    usedExports: true,
+    splitChunks: {
+      chunks: "all",
+      minSize: 2000,
+      //omit minSize in real use case to use the default of 30kb
+    },
   },
   module: {
     rules: [
@@ -67,6 +72,7 @@ const config = {
     new HtmlWebpackPlugin({
       title: "Hello_World",
       description: "configuration_webpack",
+      minify: false,
     }),
     new CleanWebpackPlugin({
       verbose: true, // 어떤 파일이 삭제되었는지 로그 남겨줌
