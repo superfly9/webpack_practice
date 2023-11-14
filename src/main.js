@@ -1,7 +1,7 @@
 import HelloWorldButton from "./components/hello-world-button/hello-world-button.js";
 import Heading from "./components/heading/heading.js";
 import "./timer";
-import "./index.css";
+import "./main.scss";
 import { upperCase } from "lodash-es";
 
 const heading = new Heading();
