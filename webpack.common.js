@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
-function config(env) {
+const config = (env, args) => {
   return {
     entry: {
       main: "./src/main.js",
@@ -78,6 +78,6 @@ function config(env) {
       ...[env.production ? new MiniCssExtractPlugin() : ""],
     ],
   };
-}
+};
 
 module.exports = config;
