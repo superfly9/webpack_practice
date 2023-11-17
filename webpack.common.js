@@ -4,6 +4,7 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const config = (env, args) => {
+  const { production, development } = env;
   return {
     entry: {
       main: "./src/main.js",
@@ -20,8 +21,16 @@ const config = (env, args) => {
         //omit minSize in real use case to use the default of 30kb
       },
     },
+    resolve: {
+      extensions: [".tsx", ".ts", ".js"],
+    },
     module: {
       rules: [
+        {
+          test: /\.tsx?$/,
+          use: "ts-loader",
+          exclude: /node_modules/,
+        },
         {
           test: /\.js$/,
           exclude: /node_modules/,
@@ -37,7 +46,7 @@ const config = (env, args) => {
         {
           test: /\.scss$/,
           use: [
-            env.production ? MiniCssExtractPlugin.loader : "style-loader",
+            production ? MiniCssExtractPlugin.loader : "style-loader",
             ,
             "css-loader",
             "sass-loader",
@@ -62,20 +71,20 @@ const config = (env, args) => {
         title: "main",
         description: "configuration_webpack",
         filename: "main.html",
-        minify: false,
+        minify: production,
         chunks: ["main"],
       }),
       new HtmlWebpackPlugin({
         title: "Duplication",
         filename: "duplication.html",
         description: "configuration_webpack",
-        minify: false,
+        minify: production,
         chunks: ["duplicate"],
       }),
       new CleanWebpackPlugin({
         verbose: true, // 어떤 파일이 삭제되었는지 로그 남겨줌
       }),
-      ...[env.production ? new MiniCssExtractPlugin() : ""],
+      ...[production ? new MiniCssExtractPlugin() : ""],
     ],
   };
 };
