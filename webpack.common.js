@@ -2,6 +2,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 
 const config = (env, args) => {
   const { production, development } = env;
@@ -24,11 +25,12 @@ const config = (env, args) => {
     resolve: {
       extensions: [".tsx", ".ts", ".js"],
     },
+    context: __dirname,
     module: {
       rules: [
         {
-          test: /\.tsx?$/,
-          use: "ts-loader",
+          test: /\.(ts|tsx)$/,
+          loader: "ts-loader",
           exclude: /node_modules/,
         },
         {
@@ -85,6 +87,8 @@ const config = (env, args) => {
         verbose: true, // 어떤 파일이 삭제되었는지 로그 남겨줌
       }),
       ...[production ? new MiniCssExtractPlugin() : ""],
+      ...[development ? new ForkTsCheckerWebpackPlugin() : ""],
+      // 적용 전,후 빌드 타임 4801ms, 3194ms
     ],
   };
 };
