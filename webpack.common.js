@@ -87,8 +87,8 @@ const config = (env, args) => {
         verbose: true, // 어떤 파일이 삭제되었는지 로그 남겨줌
       }),
       ...[production ? new MiniCssExtractPlugin() : ""],
-      ...[development ? new ForkTsCheckerWebpackPlugin() : ""],
-      // 적용 전,후 빌드 타임 4801ms, 3194ms
+      new ForkTsCheckerWebpackPlugin(),
+      // 적용 전,후 빌드 타임 4458ms, 3217ms
     ],
   };
 };
